@@ -66,7 +66,8 @@ def language_choice_is_valid(lang_options: Dict[int, str], lang_choice: int) -> 
 
 
 def get_name_input(name_prompt_options: Dict[int, str], lang_choice: int) -> str:
-
+    if lang_choice in name_prompt_options:
+        return name_prompt_options[lang_choice]
 
     """
     This method takes in a dictionary and a key. It returns the value in the dictionary that has a key corresponding to
@@ -77,20 +78,25 @@ def get_name_input(name_prompt_options: Dict[int, str], lang_choice: int) -> str
     :param lang_choice: The language the user has chosen
     :return:
     """
-    pass  # remove pass statement and implement me
 
 
 def name_input(name_prompt: str) -> str:
+    user_input = input(name_prompt)
+    return user_input
+
     """
     This function takes in a string and uses it to prompt the user for their name.
 
     :param name_prompt: A string in the user's chosen language that asks them for their name
     :return: The user's response when asked for their name
     """
-    pass  # remove pass statement and implement me
 
 
 def greet(name: str, greetings_options: Dict[int, str], lang_choice: int) -> None:
+    if lang_choice in greetings_options:
+        print(f'{greetings_options[lang_choice]} {name}')
+
+
     """
     Using the parameters provided, this function greets the user.
 
@@ -100,7 +106,6 @@ def greet(name: str, greetings_options: Dict[int, str], lang_choice: int) -> Non
     :param lang_choice: The language the user has chosen.
     :return:
     """
-    pass  # remove pass statement and implement me
 
 
 if __name__ == '__main__':

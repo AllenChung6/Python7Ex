@@ -102,19 +102,38 @@ def select_mode():
 def user_mode():
     if __name__ == '__main__':
         print('You are in user mode: ')
-        multilingual_greeter.print_language_options(multilingual_greeter.lang_dict)
-        chosen_lang = multilingual_greeter.language_input()
-        while multilingual_greeter.language_choice_is_valid(multilingual_greeter.lang_dict, chosen_lang) is False:
+        print_language_options(lang_dict)
+        chosen_lang = language_input()
+        while language_choice_is_valid(lang_dict, chosen_lang) is False:
             print("Invalid selection. Try again.")
-            chosen_lang = multilingual_greeter.language_input()
+            chosen_lang = language_input()
 
-        selected_prompt = f"{multilingual_greeter.get_name_input(multilingual_greeter.name_prompt_dict, chosen_lang)} \n"
-        chosen_name = multilingual_greeter.name_input(selected_prompt)
-        multilingual_greeter.greet(chosen_name, multilingual_greeter.greetings_dict, chosen_lang)
+        selected_prompt = f"{get_name_input(name_prompt_dict, chosen_lang)} \n"
+        chosen_name = name_input(selected_prompt)
+        greet(chosen_name, greetings_dict, chosen_lang)
 
 
 def admin_mode():
     print('You are in admin mode')
+    while True:
+        try:
+            admin_option = int(input('Please select 1 to add additional languages or select 2 for update greetings for existing languages. \
+Please select 3 to cancel adding options.\n'))
+            if admin_option == 1:
+                add_lang = input('Please type in a new language to add. Please select 3 to cancel adding options.\n')
+                end_dict = len(lang_dict) + 1
+                lang_dict[end_dict] = add_lang
+            elif admin_option == 2:
+                print('You want to edit greetings')
+            elif admin_option == 3:
+                print('Canceled adding languages.')
+                break
+            else:
+                print('Invalid input!')
+        except:
+            print('Invalid selection!')
+
+    print_language_options(lang_dict)
 
 
 select_mode()

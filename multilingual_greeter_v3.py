@@ -1,4 +1,5 @@
 from typing import Dict
+from random import randint
 
 # Populate this dictionary with at least two languages.
 # Use integers for keys and strings for values.
@@ -15,7 +16,7 @@ name_prompt_dict = {
 # Populate this dictionary with appropriate prompts that correspond with the ids from lang_dict.
 # Example: Key = 1. Value = 'Hello'.
 greetings_dict = {
-    1: ['Hello', 'Whats up?', 'Greetings, '], 2: ['Hola, ¿cómo está usted?', '¿Cómo te va?', '¿Qué onda?']
+    1: ['Hello', 'Whats up?', 'Greetings,'], 2: ['Hola, ¿cómo está usted?', '¿Cómo te va?', '¿Qué onda?']
 }
 
 
@@ -53,9 +54,10 @@ def name_input(name_prompt: str) -> str:
     return user_input
 
 
-def greet(name: str, greetings_options: Dict[int, str], lang_choice: int) -> None:
+def greet(name: str, greetings_options: Dict[int, list], lang_choice: int) -> None:
+    print(greetings_options)
     if lang_choice in greetings_options:
-        print(f'{greetings_options[lang_choice]} {name}')
+        print(f'{greetings_options[lang_choice][randint(0, len(greetings_options))]} {name}')
 
 
 def select_mode():
@@ -90,11 +92,12 @@ def admin_mode():
     print('You are in admin mode')
     while True:
         try:
-            admin_option = int(input('Please select 1 to add additional languages or select 2 for adding What is your name? in selected language. \
- Please type 3 to add a new greeting in your language. Please select 0 to cancel adding options.\n'))
+            admin_option = int(input('Please select 1 to add additional languages\nSelect 2 for adding What is your name? in selected language.\n\
+Please type 3 to add a new greeting in your language.\nPlease select 0 to cancel adding options.\n'))
             if admin_option == 1:
-                add_lang = input('Please type in a new language to add. Please select 0 to cancel adding options.\n') # Get new user language input
-                end_dict = len(lang_dict) + 1   # Get the end of the dictionary and assign to variable
+                add_lang = input(
+                    'Please type in a new language to add. Please select 0 to cancel adding options.\n')  # Get new user language input
+                end_dict = len(lang_dict) + 1  # Get the end of the dictionary and assign to variable
                 lang_dict[end_dict] = add_lang  # Add the user language input to the end of the dictionary
             elif admin_option == 2:
                 add_name = input(
@@ -102,10 +105,11 @@ def admin_mode():
                 end_name = len(name_prompt_dict) + 1
                 name_prompt_dict[end_name] = add_name
             elif admin_option == 3:
+                select_greeting = int(input(f'Please select a language from the greet menu: {greetings_dict}\n'))
                 add_greeting = input(
                     'Please type in a new greeting to add. Please select 3 to cancel adding options.\n')
-                end_greeting = len(greetings_dict) + 1
-                greetings_dict[end_greeting] = add_greeting
+                # end_greeting = greetings_dict[select_greeting][list]
+                greetings_dict[select_greeting] += [add_greeting]  # Adds new Value to end of list inside the dictionary!!!
             elif admin_option == 0:
                 print('Canceled adding languages.')
                 break

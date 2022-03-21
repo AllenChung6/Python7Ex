@@ -62,12 +62,12 @@ def greet(name: str, greetings_options: Dict[int, list], lang_choice: int) -> No
 
 def select_mode():
     while True:
-        mode = (int(input('Please enter 1 for admin mode or 2 for user mode or 3 to exit:\n')))
+        mode = (int(input('Please enter 1 for admin mode or 2 for user mode or 0 to exit:\n')))
         if mode == 1:
             admin_mode()
         elif mode == 2:
             user_mode()
-        elif mode == 3:
+        elif mode == 0:
             break
         else:
             print('Invalid input')

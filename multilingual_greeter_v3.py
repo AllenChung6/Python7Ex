@@ -15,7 +15,7 @@ name_prompt_dict = {
 # Populate this dictionary with appropriate prompts that correspond with the ids from lang_dict.
 # Example: Key = 1. Value = 'Hello'.
 greetings_dict = {
-    1: 'Hello', 2: 'Hola'
+    1: ['Hello', 'Whats up?', 'Greetings, '], 2: ['Hola, ¿cómo está usted?', '¿Cómo te va?', '¿Qué onda?']
 }
 
 
@@ -103,7 +103,7 @@ def admin_mode():
                 name_prompt_dict[end_name] = add_name
             elif admin_option == 3:
                 add_greeting = input(
-                    'Please type in a new greeting to add. Please select 0 to cancel adding options.\n')
+                    'Please type in a new greeting to add. Please select 3 to cancel adding options.\n')
                 end_greeting = len(greetings_dict) + 1
                 greetings_dict[end_greeting] = add_greeting
             elif admin_option == 0:
